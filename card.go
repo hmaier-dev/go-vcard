@@ -288,6 +288,20 @@ func (c Card) Address() *Address {
 	return newAddress(adr)
 }
 
+// Addresses returns emails of the card.
+func (c Card) Emails() []*Field {
+	emails := c[FieldEmail]
+	if emails == nil {
+		return nil
+	}
+
+	allEmails := make([]*Field, len(emails))
+	for i, mail := range emails {
+		allEmails[i] = mail
+	}
+	return allEmails
+}
+
 // AddAddress adds an address to the list of addresses.
 func (c Card) AddAddress(address *Address) {
 	c.Add(FieldAddress, address.field())
@@ -514,3 +528,5 @@ func (a *Address) field() *Field {
 	}, ";")
 	return a.Field
 }
+
+
