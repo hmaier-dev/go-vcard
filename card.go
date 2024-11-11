@@ -166,6 +166,21 @@ func (c Card) Value(k string) string {
 	}
 	return f.Value
 }
+// AllValue returns all field values of the card for the given property. If
+// there is no such field, it returns an empty string.
+func (c Card) AllValues(k string) []string {
+	f := c.GetAll(k)
+	if f == nil {
+        ret := make([]string, 0)
+		return ret
+	}
+    allValues := make([]string, len(f))
+    for _, v := range f {
+        allValues = append(allValues, v.Value)
+    }
+
+	return allValues
+}
 
 // AddValue adds the k, v pair to the list of field values. It appends to any
 // existing values.
