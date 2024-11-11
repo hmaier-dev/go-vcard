@@ -106,6 +106,19 @@ func (c Card) Get(k string) *Field {
 	}
 	return fields[0]
 }
+// GetAll returns all fields of the card for the given property. If there is
+// no such field, it returns nil.
+func (c Card) GetAll(k string) []*Field {
+	fields := c[k]
+	if len(fields) == 0 {
+		return nil
+	}
+    allFields := make([]*Field, len(fields))
+    for i, f := range fields {
+        allFields[i] = f
+    }
+	return allFields
+}
 
 // Add adds the k, f pair to the list of fields. It appends to any existing
 // fields.
